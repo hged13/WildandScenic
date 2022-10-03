@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>D3: Loading GeoJSON data and generating SVG paths</title>
+    <script src="https://d3js.org/d3.v7.js"></script>
+  
+    <style>
+        path {
+            fill: none;
+            stroke-width: 1px;
+            stroke: #222;
+        }
+
+        .grat {
+            stroke: #222;
+            stroke-dasharray: 4px;
+            stroke-width: 1px;
+            opacity: .5
+        }
+        div.tooltip {
+        position: absolute; text-align: center;
+        width: 200px;
+        height: 28px;
+        padding: 2px;
+        font: 12px sans-serif; 
+        background: lightsteelblue; 
+        border: 0px; 
+        border-radius: 8px; 
+        pointer-events: none;
+        }
+        #circle {
+            width: 10px;
+            height: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            background: grey;
+         }
+         #table1 {
+    margin-top:-150px;
+    margin-left:200px;}
+    #table2 {
+    margin-top:-255px;
+    margin-left:950px;}
+   
+    </style>
+   
+</head>
+<body>
+<p> <div style="position:relative; left:570px">  Montana's Wild and Scenic Rivers</div> </p>
+<div style=" text-align: center"> <p> Montana has 388 miles of river throughout the state that are designated as "Wild and Scenic": The Nation's highest form of river protection.<br>"The National Wild and Scenic Rivers System was created by Congress in 1968 to preserve certain rivers with outstanding natural, cultural, and recreational values in a free-flowing condition for the enjoyment of present and future generations."(Rivers.gov)</p>
+    <p> Hypothesis: Montana rivers that contain a "wild and scenic" designated section contain less impoundments (dams) and less impaired, or less severely impaired water than rivers with no designated section.
+    </p>
+    <p> Water quality for this project will be defined by the Montana 2020 Final Water Quality Integrated Report (deq.mt.gov) 
+    </p> 
+    </div>
+    
+
+   
+
+
+<p>
+     <text>
+        <div style = "position:relative; left:570px; top:45px">
+            Montana Rivers and Impaired Water
+
+         </div><div style = "font-size: 12px; position:relative; left:450px; top:50px">
+         Toggle to hide/show features. Hover over rivers or dams with mouse to see river/dam names</div>
+     </text>
+</p>
+   <p><div style = "position:relative; left:500px; top:50px; z-index:1"> <button id="Dams">Dams</button>
+    <button id="Scenic">Wild and Scenic Rivers</button>
+    <button id="rivers">Other Rivers</button>
+    <button id="Hide">Wild and Scenic Sections</button> </div>
+</p> 
+
+
+<div style="width: 800; text-align: center; position:relative; top:-100px">  
+
+<svg width="800" height="800">
+    <g id="montanaLayer"></g>
+    <g id="countyLayer"></g>
+
+    <g id="scenicLayer"; z-index="1"></g>
+    <g id="MissouriLayer"></g>
+    <g id="damLayer"></g>
+    <g id="FlatheadLayer"></g>
+    <g id="RosebudLayer"></g>
+    <g id="ImpairLayer"></g>
+    <g id="riverLayer"></g>
+    <g id="river2Layer"></g>
+    <g id="littleLayer"></g>
+    <g id="yaakLayer"></g>
+    <g id="impairedLayer"></g>
+    <g id="otherdamLayer"></g>
+    <g id="otherdam1Layer"></g>
+
+</svg></div>
+
+
+
+
+<script src="Scenic_Rivers.js"></script>
+
+<table border="1" id="table1">
+    <tr>
+    <th>WQ Quality Index</th> <th>Color</th><th>Category description</th>
+    </tr> <tr>
+    <td>Category 5</td>
+    <td style="background-color:#993404"></td> <td>Polluted water that requires a water quality improvement project.<br> Water quality in this category has been violated by one or more<br> pollutants, and there is no current control program in place.    </td> </tr>
+    <tr>
+    <td>Category 4</td> <td style="background-color:#d95f0e"></td> <td>Impaired water that doesn't require a control program because <br>
+        a program is already in place or because the water is impaired due<br> to causes that cannot be addressed by a program. 
+    </td><tr>
+    <td>Category 3</td> <td style="background-color:#fe9929"></td><td>Insufficient data to place in any other category.</td>
+    <tr>
+    <td>Category 2</td> <td style="background-color:#fed98e"> <td>Water of concern. Water in this category have evidence of quality problems, <br>
+    but not enough to show persistent impairment. <br> these water bodies will continue to be tested. </td></td>
+    <tr>
+        <td>Category 1/ no designation</td> <td style="background-color:black"></td> <td>Meets tested standards for clean water</td>
+
+    </tr> </table>
+
+    <table border="1" id="table2">
+        <tr>
+        <th>Other Keys</th> <th>Color</th>
+        </tr> <tr>
+        <td>Wild and Scenic Designation</td>
+        <td style="background-color:#007d79"></td> </tr>
+        <tr>
+            <td>Dams</td>
+            <td style="vertical-align:middle;"> <div id="circle"></div></td> 
+      
+        </tr> </table>
+
+
+
+
+<footer> <div style = "font-weight: bold; margin-top:20px; margin-left:950px;">Data Sources: https://deq.mt.gov/water/resources<br>
+                https://maps.nashville.gov/arcgis/rest/services/Hydrography/WaterFeatures<br>
+                https://www.openstreetmap.org<br></div>
+
+
+</footer>
+</body>
+</html>
